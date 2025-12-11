@@ -5,7 +5,7 @@ ToDo Quote
 {% block content %}
     <div class="row">
         <div class="col-10 offset-1">
-            <form action="/results" method="post">
+            <form action="/" method="post">
                 <p>
                     <label for="task">Task</label>
                     <br>
@@ -24,11 +24,6 @@ ToDo Quote
     </div>
     <div class="row">
         <div class="col-10 offset-1">
-            {% if tasklist|length == 0 %}
-                <div class="alert alert-primary" role="alert">
-                    No tasks
-                </div>
-            {% else %}
                 <ul class="list-group">
                     {% for task in tasklist %}
                         <li class="list-group-item">
@@ -37,7 +32,6 @@ ToDo Quote
                         </li>
                     {% endfor %}
                 </ul>
-            {% endif %}
         </div>
     </div>
 {% endblock %}

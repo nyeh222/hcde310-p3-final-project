@@ -4,15 +4,28 @@ ToDo Quote
 {% endblock %}
 {% block content %}
     <div class="row">
+        <div class="col-4">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/">To Dos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/completed">Complete</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-10 offset-1">
+            <br>
             <form action="/" method="post">
                 <p>
-                    <label for="task">Task</label>
+                    <label for="task">Task (Required)</label>
                     <br>
                     <input class="form-control" type="text" name="task" id="task">
                 </p>
                 <p>
-                    <label for="deadline">Due Date</label>
+                    <label for="deadline">Due Date (Required)</label>
                     <br>
                     <input class="form-control" type="date" name="deadline" id="deadline">
                 </p>
@@ -22,14 +35,23 @@ ToDo Quote
             </form>
         </div>
     </div>
+<hr>
+    <div class="row">
+        <div class="col-10 offset-1 text-center">
+            <h3>To Do List</h3>
+        </div>
+    </div>
     <div class="row">
         <div class="col-10 offset-1">
                 <ul class="list-group">
                     {% for task in tasklist %}
-                        <li class="list-group-item">
-                            {{ task.tasktext }}
-                            {{ task.deadline }}
-                        </li>
+                        {% if not task.completed %}
+                            <li class="list-group-item">
+                                {{ task.tasktext }}
+                                <br>
+                                <small class="text-muted">{{ task.deadline }}</small>
+                            </li>
+                        {% endif %}
                     {% endfor %}
                 </ul>
         </div>

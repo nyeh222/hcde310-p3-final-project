@@ -9,7 +9,7 @@ db.init_app(app)
 
 class Task(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    deadline = db.Column(db.Date)
+    deadline = db.Column(db.String)
     tasktext = db.Column(db.String, nullable=False)
     completed = db.Column(db.Boolean)
 
@@ -20,9 +20,9 @@ with app.app_context():
 def index():
     if request.method == 'POST':
         taskItem = Task(
-            tasktext = request.form['tasktext'],
+            tasktext = request.form['task'],
             deadline = request.form['deadline'],
-            done = False
+            completed = False
         )
         db.session.add(taskItem)
         db.session.commit()
@@ -31,6 +31,14 @@ def index():
         tasklist = db.session.execute(db.select(Task).order_by(Task.deadline)).scalars()
         return render_template('index.html', tasklist=tasklist)
 
-@app.route('/completed')
+@app.route('/completed', methods=['GET', 'POST'])
 def completed():
-    return render_template('completed.html')
+    if request.method == 'POST':
+        marked_task = request.form['select']
+        task = db.session.execute(db.select(Task).where(Task.id == marked_task)).scalar()
+        task.completed = True
+        db.session.commit()
+        return redirect('/completed')
+    else:
+        taskdone = db.session.execute(db.select(Task).where(Task.completed == True).order_by(Task.deadline)).scalars()
+        return render_template('completed.html', taskdone=taskdone)

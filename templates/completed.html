@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block title %}
+ToDo Completed
+{% endblock %}
+{% block content %}
+    <div class="row">
+        <div class="col-4">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">To Dos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/completed">Complete</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+<br>
+    <div class="row">
+        <div class="col-10 offset-1 text-center">
+            <h3>Mark Complete</h3>
+        </div>
+    </div>
+    <div class="col-10 offset-1">
+        <form action="/completed" method="post">
+            <p>
+                <select class="form-select" aria-label="Default select example" name="select" id="select">
+                    <option selected>Open for tasks</option>
+                        {% for task in tasklist %}
+                            {% if not task.completed %}
+                                <option value="{{ task.id }}">{{ task.tasktext }}</option>
+                            {% endif %}
+                        {% endfor %}
+                </select>
+            </p>
+            <p>
+                <input type="submit" value="Mark as complete">
+            </p>
+        </form>
+    </div>
+    <div class="row">
+        <div class="col-10 offset-1 text-center">
+            <h3>Completed List</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-10 offset-1">
+                <ul class="list-group">
+                    {% for task in taskdone %}
+                        <li class="list-group-item">
+                            {{ task.tasktext }}
+                            <br>
+                            <small class="text-muted">{{ task.deadline }}</small>
+                        </li>
+                    {% endfor %}
+                </ul>
+        </div>
+    </div>
+{% endblock %}

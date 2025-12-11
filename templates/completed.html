@@ -27,9 +27,7 @@ ToDo Completed
                 <select class="form-select" aria-label="Default select example" name="select" id="select">
                     <option selected>Open for tasks</option>
                         {% for task in tasklist %}
-                            {% if not task.completed %}
-                                <option value="{{ task.id }}">{{ task.tasktext }}</option>
-                            {% endif %}
+                            <option value="{{ task.id }}">{{ task.tasktext }}</option>
                         {% endfor %}
                 </select>
             </p>
@@ -38,6 +36,7 @@ ToDo Completed
             </p>
         </form>
     </div>
+<hr>
     <div class="row">
         <div class="col-10 offset-1 text-center">
             <h3>Completed List</h3>

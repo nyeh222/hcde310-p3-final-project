@@ -1,1 +1,2 @@
-/keys.py
+/projectsecrets/keys.py
+/projectsecrets/app_secrets.py

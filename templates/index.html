@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}
+ToDo Quote
+{% endblock %}
+{% block content %}
+    <div class="row">
+        <div class="col-10 offset-1">
+            <form action="/results" method="post">
+                <p>
+                    <label for="task">Task</label>
+                    <br>
+                    <input class="form-control" type="text" name="task" id="task">
+                </p>
+                <p>
+                    <label for="deadline">Due Date</label>
+                    <br>
+                    <input class="form-control" type="date" name="deadline" id="deadline">
+                </p>
+                <p>
+                    <input type="submit" value="Add">
+                </p>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-10 offset-1">
+            {% if tasklist|length == 0 %}
+                <div class="alert alert-primary" role="alert">
+                    No tasks
+                </div>
+            {% else %}
+                <ul class="list-group">
+                    {% for task in tasklist %}
+                        <li class="list-group-item">
+                            {{ task.tasktext }}
+                            {{ task.deadline }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

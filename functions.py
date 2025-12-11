@@ -41,25 +41,9 @@ def get_num_quote():
     return 1
 
 #goes through most pages and extracts their quote and adds to the list
+#returns list
 def all_quotes():
     num_pages = get_num_quote() // 25
     for page in range(1, num_pages + 1):
         extract_quotes(find_quote(page))
-
-#gets a random quote from the quote list
-def get_random_quote():
-    random_quote = random.choice(total_quotes)
-    return random_quote
-
-all_quotes()
-print(total_quotes)
-print(len(total_quotes))
-print()
-print(get_random_quote())
-
-# print(get_num_quote())
-# url = "https://favqs.com/api/typeahead/"
-# headers = {"Authorization": "Token token=" + keys.favq_key}
-#
-# quotes = requests.get(url, headers=headers)
-# print(quotes.json())
+    return total_quotes

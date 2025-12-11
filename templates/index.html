@@ -47,9 +47,13 @@ ToDo Quote
                     {% for task in tasklist %}
                         {% if not task.completed %}
                             <li class="list-group-item">
-                                {{ task.tasktext }}
-                                <br>
+                                <h4>{{ task.tasktext }}</h4>
                                 <small class="text-muted">{{ task.deadline }}</small>
+                                <br>
+                                <br>
+                                <em>{{ task.quote }}</em>
+                                <small class="text-muted"><em>{{ task.author }}</em></small>
+
                             </li>
                         {% endif %}
                     {% endfor %}

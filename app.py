@@ -1,7 +1,9 @@
-from flask import Flask, request, render_template, redirect
+from flask import Flask, request, render_template, redirect, session
 from flask_sqlalchemy import SQLAlchemy
+from projectsecrets import app_secrets
 
 app = Flask(__name__)
+app.secret_key = app_secrets.app_key
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///todos.db'
 db = SQLAlchemy()
